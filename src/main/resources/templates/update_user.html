@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>List Of Expenses</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <form th:action="@{/update/{id}(id=${expense.id})}"
+              th:object="${expense}"
+              method="post" style="max-width: 600px; margin: 0 auto;" >
+            <label for="amount">Amount</label>
+            <input type="number" th:field="*{amount}" id="amount" ><br>
+
+            <label >Currency</label>
+            <select th:field="*{currency}">
+                <option value="INR">INR</option>
+                <option value="Dollar">Dollar</option>
+            </select><br>
+
+            <label >Category</label>
+            <select th:field="*{category}">
+                <option value="home">Home</option>
+                <option value="food">Food</option>
+                <option value="fuel">Fuel</option>
+                <option value="shopping">Shopping</option>
+                <option value="other">Other</option>
+            </select><br>
+
+            <label >Description</label>
+            <input type="text" th:field="*{description}" id="description"><br>
+
+
+            <input type="submit" value="Update Expense">
+        </form>
+    </div>
+
+
+</div>
+</body>
+</html>

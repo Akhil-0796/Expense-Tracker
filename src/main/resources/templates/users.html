@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>List Of Expenses</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container text-center">
+    <div>
+        <form th:action="@{/logout}" method="post">
+            <p>
+                Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+
+
+            </p>
+            <input type="submit" value="Sign Out" />
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/addExpense}" method="get">
+            <input type="submit" value="Add Expense" />
+        </form>
+    </div>
+    <div>
+        <form th:action="@{/home}" method="get">
+            <input type="submit" value="Home" />
+        </form>
+    </div>
+    <div>
+        <h1>List of Users</h1>
+    </div>
+
+    <div>
+
+
+        <form th:action="@{/sorting}" method="get">
+            <label  value="Sort By Category" >Sort By Category</label>
+            <select th:value="${keyword}" name="keyword" id="keyword">
+                <option value="none">Please select...</option>
+                <option value="home">Home</option>
+                <option value="food">Food</option>
+                <option value="fuel">Fuel</option>
+                <option value="shopping">Shopping</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="submit" value="sort" />
+        </form>
+    </div>
+
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+            <tr>
+
+                <th>Amount</th>
+                <th>Currency</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Update</th>
+                <th>Delete</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="ex: ${listExpenses}">
+                <td th:text="${ex.amount}">Amount</td>
+                <td th:text="${ex.currency}">Currency</td>
+                <td th:text="${ex.date}">Date</td>
+                <td th:text="${ex.category}">Category</td>
+                <td th:text="${ex.description}">Description</td>
+                <td><a th:href="@{/edit/{id}(id=${ex.id})}">update</a></td>
+                <td><a th:href="@{/delete/{id}(id=${ex.id})}">remove</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
